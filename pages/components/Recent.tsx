@@ -3,6 +3,7 @@ import { MdLibraryAdd } from "react-icons/md";
 import { Meme } from "./Meme";
 
 import "firebase/compat/firestore";
+import "firebase/compat/storage";
 import firebase from "../../firebase/clientApp";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 const firestore = firebase.firestore();
@@ -10,7 +11,8 @@ const firestore = firebase.firestore();
 export const Recent: React.FC = () => {
   const [inputWindow, setinputWindow] = useState<boolean>(false);
   const [inputTitle, setInputTitle] = useState<string>("");
-  const [inputImage, setinputImage] = useState("");
+  const [inputImage, setinputImage]: any = useState("");
+  const [file, setFile] = useState() as any;
 
   const memesRef = firestore.collection("memes");
   const [memeData] = useCollectionData(memesRef);
@@ -19,9 +21,12 @@ export const Recent: React.FC = () => {
     if (e.target.value.length < 40) setInputTitle(e.target.value);
   };
 
-  const handleInputImage = (e: any) => {
+  const handleInputImage = async (e: any) => {
     const objectUrl = URL.createObjectURL(e.target.files[0]);
     setinputImage(objectUrl);
+
+    setFile(e.target.files[0]);
+
     setInputTitle(e.target.files[0].name);
   };
 
@@ -33,9 +38,14 @@ export const Recent: React.FC = () => {
 
   const submitUpload = async () => {
     if (inputImage !== "") {
+      const storageRef = firebase.storage().ref();
+      const fileRef = storageRef.child(file.name);
+      await fileRef.put(file);
+      const image = await fileRef.getDownloadURL();
+
       await memesRef.add({
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        meme: inputImage,
+        meme: image,
         title: inputTitle,
         likes: 0,
       });
@@ -84,6 +94,7 @@ export const Recent: React.FC = () => {
               onChange={handleInputImage}
               type="file"
               className="recent__inputFile"
+              accept="image/png, image/jpeg"
             />
             <input
               onChange={handleInputTitle}

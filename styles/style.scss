@@ -337,15 +337,13 @@ html {
 }
 
 .meme {
-  border-radius: 15px;
-  background-color: $t;
   margin-top: 40px;
 
   &__img {
     background-color: $c;
     //aspect-ratio: 330/300;
     width: 100%;
-    border-radius: 15px;
+    border-radius: 15px 15px 0px 0px;
   }
 
   &__details {
@@ -353,11 +351,13 @@ html {
     display: grid;
     grid-template-columns: 1fr 0fr 0fr;
     align-items: center;
+    background-color: $t;
+    border-radius: 0px 0px 15px 15px;
   }
 
   &__icon {
     color: $c;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -372,7 +372,7 @@ html {
   &__like {
     color: $bg;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 15px;
     margin-left: 5px;
   }
 }
@@ -514,6 +514,7 @@ html {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-area: memes;
+      place-items: center;
     }
 
     &__btn,

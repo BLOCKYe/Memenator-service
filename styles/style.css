@@ -407,15 +407,13 @@ html {
 }
 
 .meme {
-  border-radius: 15px;
-  background-color: #fbfbff;
   margin-top: 40px;
 }
 
 .meme__img {
   background-color: #7233ff;
   width: 100%;
-  border-radius: 15px;
+  border-radius: 15px 15px 0px 0px;
 }
 
 .meme__details {
@@ -427,11 +425,13 @@ html {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background-color: #fbfbff;
+  border-radius: 0px 0px 15px 15px;
 }
 
 .meme__icon {
   color: #7233ff;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -452,7 +452,7 @@ html {
 .meme__like {
   color: #232130;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 15px;
   margin-left: 5px;
 }
 
@@ -586,6 +586,7 @@ html {
     -ms-grid-column: 1;
     -ms-grid-column-span: 2;
     grid-area: memes;
+    place-items: center;
   }
   .recent__btn, .recent__inputFile, .recent__inputSubmit, .recent__inputCancel, .recent__inputCancel {
     cursor: pointer;
