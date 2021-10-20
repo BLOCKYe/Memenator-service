@@ -1,33 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MdLibraryAdd } from "react-icons/md";
 import { Meme } from "./Meme";
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
 
 import "firebase/compat/firestore";
 import firebase from "../../firebase/clientApp";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 const firestore = firebase.firestore();
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const bruh = "siema";
-
-  return {
-    props: {
-      bruh,
-    },
-  };
-};
-
-export const Recent: React.FC = (props: any) => {
+export const Recent: React.FC = () => {
   const [inputWindow, setinputWindow] = useState<boolean>(false);
   const [inputTitle, setInputTitle] = useState<string>("");
   const [inputImage, setinputImage] = useState("");
-  console.log(props);
 
   const memesRef = firestore.collection("memes");
-  let memeData: any = [{ meme: "co tam", title: "dupa" }];
-  //[memeData] = useCollectionData(memesRef);
-  console.log(memeData);
+  const [memeData] = useCollectionData(memesRef);
 
   const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 40) setInputTitle(e.target.value);
@@ -45,9 +31,14 @@ export const Recent: React.FC = (props: any) => {
     setinputWindow(false);
   };
 
-  const submitUpload = () => {
+  const submitUpload = async () => {
     if (inputImage !== "") {
-      // push to firebase storage
+      await memesRef.add({
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        meme: inputImage,
+        title: inputTitle,
+        likes: 0,
+      });
 
       clearUploadField();
     }
@@ -112,8 +103,13 @@ export const Recent: React.FC = (props: any) => {
       </div>
 
       <div className="recent__memeContainer">
-        {memeData.map((meme: any) => (
-          <Meme key={meme.meme} title={meme.title} meme={meme.meme} />
+        {memeData?.map((meme: any) => (
+          <Meme
+            key={meme.meme}
+            title={meme.title}
+            meme={meme.meme}
+            likes={meme.likes}
+          />
         ))}
       </div>
     </div>

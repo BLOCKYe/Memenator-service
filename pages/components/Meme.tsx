@@ -4,6 +4,7 @@ import { AiFillHeart } from "react-icons/ai";
 interface Props {
   title: string,
   meme: string
+  likes: number
 }
 
 export const Meme: React.FC<Props> = (props) => {
@@ -15,7 +16,7 @@ export const Meme: React.FC<Props> = (props) => {
       <div className="meme__details">
         <div className="meme__title">{props.title}</div>
         <AiFillHeart className="meme__icon" />
-        <div className="meme__like">54</div>
+        <div className="meme__like">{props.likes}</div>
       </div>
     </div>
   );
