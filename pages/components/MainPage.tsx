@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // icons
 import { MdLibraryAdd, MdCloudUpload } from "react-icons/md";
 import { BsEmojiSunglassesFill } from "react-icons/bs";
@@ -9,9 +9,9 @@ export const MainPage: React.FC = () => {
   return (
     <Box
       bg="gray.900"
-      h="100%"
-      w="100vw"
-      p={{ base: 5, xl: "10%", lg: "10%" }}
+      h={{ base: "100%", xl: "90vh" }}
+      w="100%"
+      p={{ base: 5, xl: "17%", lg: "13%" }}
       color="white"
       letterSpacing="0.3px"
       display="flex"
@@ -27,7 +27,7 @@ export const MainPage: React.FC = () => {
           display="flex"
           flexDirection="column"
           justifySelf="end"
-          width={{ xl: "90%" }}
+          width={{ xl: "100%" }}
         >
           <Heading
             fontSize={{ base: "4xl", xl: "5xl" }}
@@ -60,19 +60,27 @@ export const MainPage: React.FC = () => {
             _focus={{ outline: "none" }}
             _hover={{ bg: "whiteAlpha.300" }}
             variant="outline"
-            mt={3}
+            mt={5}
             p={5}
             leftIcon={<MdLibraryAdd />}
+            onClick={() =>
+              window.scrollTo({
+                left: 0,
+                top: 600,
+                behavior: "smooth",
+              })
+            }
           >
             Let'start
           </Button>
         </Box>
+
         <Box
           alignItems="center"
           display="flex"
           flexDirection="column"
           justifySelf="start"
-          width={{ base: "100%", xl: "90%" }}
+          width={{ base: "100%", xl: "100%" }}
         >
           <Box
             borderRadius="xl"
@@ -81,11 +89,13 @@ export const MainPage: React.FC = () => {
             p={7}
             pt={6}
             pb={6}
+            ml={{ xl: "-70px" }}
             bg="#7233FF"
             mt={{ base: 12, lg: 0 }}
             w="100%"
             alignItems="center"
-            maxWidth="500px"
+            maxW="sm"
+            boxShadow="rgba(114, 51, 255, 0.15) 0px 28px 50px 0px;"
           >
             <Box>
               <Text fontSize="xl" fontWeight="bold">
@@ -95,7 +105,7 @@ export const MainPage: React.FC = () => {
                 Just select image from your device
               </Text>
             </Box>
-            <Box fontSize="4xl" justifySelf="end">
+            <Box fontSize={{base: "2xl", sm: "4xl"}} justifySelf="end">
               <MdCloudUpload />
             </Box>
           </Box>
@@ -112,7 +122,8 @@ export const MainPage: React.FC = () => {
             w="100%"
             alignItems="center"
             color="gray.900"
-            maxWidth="500px"
+            maxW="sm"
+            boxShadow="rgba(114, 51, 255, 0.15) 0px 28px 50px 0px;"
           >
             <Box>
               <Text fontSize="xl" fontWeight="bold">
@@ -122,7 +133,7 @@ export const MainPage: React.FC = () => {
                 Watch any meme you want
               </Text>
             </Box>
-            <Box fontSize="4xl" justifySelf="end">
+            <Box fontSize={{base: "2xl", sm: "4xl"}} justifySelf="end">
               <BsEmojiSunglassesFill />
             </Box>
           </Box>
@@ -136,9 +147,11 @@ export const MainPage: React.FC = () => {
             pb={6}
             bg="#7233FF"
             mt={5}
+            ml={{ xl: "-40px" }}
             w="100%"
             alignItems="center"
-            maxWidth="500px"
+            maxW="sm"
+            boxShadow="rgba(114, 51, 255, 0.15) 0px 28px 50px 0px;"
           >
             <Box>
               <Text fontSize="xl" fontWeight="bold">
@@ -148,7 +161,7 @@ export const MainPage: React.FC = () => {
                 Share memes with your friends
               </Text>
             </Box>
-            <Box fontSize="4xl" justifySelf="end">
+            <Box fontSize={{base: "2xl", sm: "4xl"}} justifySelf="end">
               <IoShareSocialSharp />
             </Box>
           </Box>

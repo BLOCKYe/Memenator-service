@@ -16,6 +16,7 @@ import {
   PopoverArrow,
   PopoverCloseButton,
   Image,
+  useToast,
 } from "@chakra-ui/react";
 
 import "firebase/compat/firestore";
@@ -28,6 +29,7 @@ export const Recent: React.FC = () => {
   const [inputTitle, setInputTitle] = useState<string>("");
   const [inputImage, setinputImage]: any = useState("");
   const [file, setFile] = useState() as any;
+  const toast = useToast();
 
   const memesRef = firestore.collection("memes");
   const [memeData] = useCollectionData(memesRef);
@@ -62,6 +64,14 @@ export const Recent: React.FC = () => {
         likes: 0,
       });
 
+      toast({
+        title: "You successfully uploaded a meme!",
+        description: "Thank you!",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+
       clearUploadField();
     }
   };
@@ -70,14 +80,17 @@ export const Recent: React.FC = () => {
     <Box
       bg="gray.900"
       h="100%"
-      w="100vw"
-      p={{ base: 5, xl: "10%", lg: "10%" }}
+      w="100%"
+      p={{ base: 5, xl: "17%", lg: "13%" }}
+      pt={{ base: 5, xl: "5%" }}
       color="white"
       letterSpacing="0.3px"
       display="flex"
       gridTemplateColumns="1fr 1fr"
       flexDirection="column"
       alignItems="center"
+      borderTop={{ lg: "1px" }}
+      borderColor={{lg: "gray.700"}}
     >
       <Box
         flexDirection={{ base: "column", lg: "row" }}
@@ -148,6 +161,7 @@ export const Recent: React.FC = () => {
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
+                boxShadow="rgba(114, 51, 255, 0.15) 0px 28px 50px 0px"
               >
                 <input
                   onChange={handleInputImage}
@@ -185,18 +199,44 @@ export const Recent: React.FC = () => {
         mt={12}
         display={{ base: "flex", lg: "grid" }}
         gap={8}
-        gridTemplateColumns={{ xl: "1fr 1fr 1fr", lg: "1fr 1fr" }}
+        //gridTemplateColumns={{ xl: "1fr 1fr 1fr", lg: "1fr 1fr" }}
+        gridTemplateColumns="repeat(3, minmax(0, 1fr))"
         flexDirection="column"
-        alignItems="center"
       >
-        {memeData?.map((meme: any) => (
-          <Meme
-            key={meme.meme}
-            title={meme.title}
-            meme={meme.meme}
-            likes={meme.likes}
-          />
-        ))}
+        <Box>
+          {memeData?.slice(0, memeData.length / 3).map((meme: any) => (
+            <Meme
+              key={meme.meme}
+              title={meme.title}
+              meme={meme.meme}
+              likes={meme.likes}
+            />
+          ))}
+        </Box>
+        <Box>
+          {memeData
+            ?.slice(memeData.length / 3, (memeData.length / 3) * 2)
+            .map((meme: any) => (
+              <Meme
+                key={meme.meme}
+                title={meme.title}
+                meme={meme.meme}
+                likes={meme.likes}
+              />
+            ))}
+        </Box>
+        <Box>
+          {memeData
+            ?.slice((memeData.length / 3) * 2, memeData.length)
+            .map((meme: any) => (
+              <Meme
+                key={meme.meme}
+                title={meme.title}
+                meme={meme.meme}
+                likes={meme.likes}
+              />
+            ))}
+        </Box>
       </Box>
     </Box>
   );
