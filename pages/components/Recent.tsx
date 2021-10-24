@@ -1,6 +1,22 @@
 import React, { useState } from "react";
 import { MdLibraryAdd } from "react-icons/md";
 import { Meme } from "./Meme";
+import {
+  Box,
+  Text,
+  Heading,
+  Button,
+  Popover,
+  Portal,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  Input,
+  PopoverArrow,
+  PopoverCloseButton,
+  Image,
+} from "@chakra-ui/react";
 
 import "firebase/compat/firestore";
 import "firebase/compat/storage";
@@ -9,7 +25,6 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 const firestore = firebase.firestore();
 
 export const Recent: React.FC = () => {
-  const [inputWindow, setinputWindow] = useState<boolean>(false);
   const [inputTitle, setInputTitle] = useState<string>("");
   const [inputImage, setinputImage]: any = useState("");
   const [file, setFile] = useState() as any;
@@ -24,16 +39,13 @@ export const Recent: React.FC = () => {
   const handleInputImage = async (e: any) => {
     const objectUrl = URL.createObjectURL(e.target.files[0]);
     setinputImage(objectUrl);
-
     setFile(e.target.files[0]);
-
     setInputTitle(e.target.files[0].name);
   };
 
   const clearUploadField = () => {
     setinputImage("");
     setInputTitle("");
-    setinputWindow(false);
   };
 
   const submitUpload = async () => {
@@ -55,65 +67,128 @@ export const Recent: React.FC = () => {
   };
 
   return (
-    <div className="recent">
-      <div className="circle"></div>
-      <div className="cross"></div>
-      <div className="recent__header">
-        <h1 className="recent__title">Recent memes</h1>
-        <p className="recent__subtitle">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          suscipit augue eleifend mauris dictum, at sagittis sem faucibus. Ut
-          tristique metus ullamcorper euismod fringilla.
-        </p>
-      </div>
-
-      <div className="recent__upload">
-        <div
-          onClick={() => setinputWindow(!inputWindow)}
-          className="recent__btn"
+    <Box
+      bg="gray.900"
+      h="100%"
+      w="100vw"
+      p={{ base: 5, xl: "10%", lg: "10%" }}
+      color="white"
+      letterSpacing="0.3px"
+      display="flex"
+      gridTemplateColumns="1fr 1fr"
+      flexDirection="column"
+      alignItems="center"
+    >
+      <Box
+        flexDirection={{ base: "column", lg: "row" }}
+        display="flex"
+        justifySelf="center"
+        alignItems="center"
+      >
+        <Box
+          alignItems={{ base: "center", lg: "start" }}
+          display="flex"
+          flexDirection="column"
+          width="100%"
         >
-          {inputImage === "" ? (
-            <div className="recent__btnContainer">
-              <div className="recent__btnIcon">
-                <MdLibraryAdd />
-              </div>
-              <span className="recent__btnText">Upload</span>
-            </div>
-          ) : (
-            <img
-              src={inputImage}
-              alt="preview"
-              className="recent__inputPreview"
-            />
-          )}
-        </div>
+          <Heading
+            fontSize={{ base: "4xl", xl: "5xl" }}
+            mt={{ base: 12, lg: 0 }}
+            color="white"
+          >
+            Recent memes
+          </Heading>
 
-        {inputWindow && (
-          <div className="recent__btnExtended">
-            <input
-              onChange={handleInputImage}
-              type="file"
-              className="recent__inputFile"
-              accept="image/png, image/jpeg"
-            />
-            <input
-              onChange={handleInputTitle}
-              placeholder="Set title"
-              type="text"
-              className="recent__inputTitle"
-              value={inputTitle}
-            />
-            <button onClick={submitUpload} className="recent__inputSubmit">
-              Upload new meme
-            </button>
-            <button onClick={clearUploadField} className="recent__inputCancel">
-              Cancel
-            </button>
-          </div>
-        )}
-      </div>
+          <Text
+            mt={3}
+            textAlign={{ base: "center", lg: "start" }}
+            color="whiteAlpha.700"
+            width={{ base: "95%", xl: "60%" }}
+            fontSize="l"
+          >
+            Nam eleifend magna purus, vel tempor dolor dignissim id. Nullam
+            volutpat ipsum feugiat luctus sodales. Vestibulum neque tellus,
+            commodo et nisl sed, efficitur finibus ex.
+          </Text>
+        </Box>
 
-      <div className="recent__memeContainer">
+        <Popover>
+          <PopoverTrigger>
+            <Button
+              _focus={{ outline: "none" }}
+              _hover={{ bg: "whiteAlpha.300" }}
+              variant="outline"
+              mt={5}
+              p={5}
+              fontSize="m"
+              leftIcon={<MdLibraryAdd />}
+            >
+              Upload meme
+            </Button>
+          </PopoverTrigger>
+          <Portal>
+            <PopoverContent p={3}>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverHeader
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                fontWeight="bold"
+                p={3}
+                textAlign="center"
+              >
+                {inputImage === "" ? (
+                  <Box>Select file</Box>
+                ) : (
+                  <Image borderRadius="xl" src={inputImage} alt="preview" />
+                )}
+              </PopoverHeader>
+              <PopoverBody
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+              >
+                <input
+                  onChange={handleInputImage}
+                  className="inputFile"
+                  type="file"
+                  accept="image/png, image/jpeg"
+                ></input>
+                <Input
+                  onChange={handleInputTitle}
+                  value={inputTitle}
+                  mt={3}
+                  _focus={{
+                    borderBottomColor: "#7233FF",
+                    borderBottomWidth: "2px",
+                  }}
+                  textAlign="center"
+                  variant="flushed"
+                  placeholder="Set title"
+                />
+                <Button
+                  onClick={submitUpload}
+                  mt={5}
+                  bg="#fbfbff"
+                  variant="solid"
+                >
+                  Upload meme
+                </Button>
+              </PopoverBody>
+            </PopoverContent>
+          </Portal>
+        </Popover>
+      </Box>
+
+      <Box
+        mt={12}
+        display={{ base: "flex", lg: "grid" }}
+        gap={8}
+        gridTemplateColumns={{ xl: "1fr 1fr 1fr", lg: "1fr 1fr" }}
+        flexDirection="column"
+        alignItems="center"
+      >
         {memeData?.map((meme: any) => (
           <Meme
             key={meme.meme}
@@ -122,7 +197,7 @@ export const Recent: React.FC = () => {
             likes={meme.likes}
           />
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };

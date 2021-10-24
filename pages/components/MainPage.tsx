@@ -1,66 +1,159 @@
 import React from "react";
-
 // icons
 import { MdLibraryAdd, MdCloudUpload } from "react-icons/md";
 import { BsEmojiSunglassesFill } from "react-icons/bs";
 import { IoShareSocialSharp } from "react-icons/io5";
+import { Box, Text, Heading, Button } from "@chakra-ui/react";
 
 export const MainPage: React.FC = () => {
   return (
-    <div className="main">
-      <div className="circle"></div>
-      <div className="circle--color"></div>
-      <div className="cross"></div>
-      <div className="cross--color"></div>
+    <Box
+      bg="gray.900"
+      h="100%"
+      w="100vw"
+      p={{ base: 5, xl: "10%", lg: "10%" }}
+      color="white"
+      letterSpacing="0.3px"
+      display="flex"
+      alignItems="center"
+    >
+      <Box
+        display={{ lg: "grid" }}
+        gridTemplateColumns="1fr 1fr"
+        alignItems="center"
+      >
+        <Box
+          alignItems={{ base: "center", lg: "start" }}
+          display="flex"
+          flexDirection="column"
+          justifySelf="end"
+          width={{ xl: "90%" }}
+        >
+          <Heading
+            fontSize={{ base: "4xl", xl: "5xl" }}
+            mt={{ base: 24, lg: 0 }}
+            color="white"
+          >
+            Memenator
+          </Heading>
 
-      <div className="main__container">
-        <div className="main__col">
-          <h1 className="main__title">Memenator</h1>
-          <p className="main__subtitle">
-            Aliquam erat volutpat. Quisque sagittis enim erat, eu bibendum justo
-            molestie posuere. Maecenas sagittis bibendum dolor eu tincidunt.
-            Praesent vel dui venenatis.
-          </p>
+          <Text
+            mt={3}
+            textAlign={{ base: "center", lg: "start" }}
+            color="whiteAlpha.700"
+            width={{ base: "95%", xl: "90%" }}
+            fontSize="l"
+          >
+            Nam eleifend magna purus, vel tempor dolor dignissim id. Nullam
+            volutpat ipsum feugiat luctus sodales. Vestibulum neque tellus,
+            commodo et nisl sed, efficitur finibus ex.
+          </Text>
 
-          <div className="main__counter">
-            <div className="main__text">Uploaded memes</div>
-            <div className="main__number">353</div>
-          </div>
+          <Text mt={12} display="flex" color="whiteAlpha.700">
+            Uploaded memes:
+            <Text fontWeight="bold" ml={2} color="white">
+              352
+            </Text>
+          </Text>
 
-          <div className="main__btn">
-            <div className="main__btnIcon">
-              <MdLibraryAdd />
-            </div>
-            <div className="main__btnText">Let's start</div>
-          </div>
-        </div>
-
-        <div className="main__cardsContainer">
-          <div className="main__card--m1">
-            <div className="main__cardTitle">Easy to upload</div>
-            <div className="main__cardText">
-              Just select image form your device
-            </div>
-            <div className="main__cardIcon">
+          <Button
+            _focus={{ outline: "none" }}
+            _hover={{ bg: "whiteAlpha.300" }}
+            variant="outline"
+            mt={3}
+            p={5}
+            leftIcon={<MdLibraryAdd />}
+          >
+            Let'start
+          </Button>
+        </Box>
+        <Box
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+          justifySelf="start"
+          width={{ base: "100%", xl: "90%" }}
+        >
+          <Box
+            borderRadius="xl"
+            display="grid"
+            gridTemplateColumns="1fr 0fr"
+            p={7}
+            pt={6}
+            pb={6}
+            bg="#7233FF"
+            mt={{ base: 12, lg: 0 }}
+            w="100%"
+            alignItems="center"
+            maxWidth="500px"
+          >
+            <Box>
+              <Text fontSize="xl" fontWeight="bold">
+                Easy to upload
+              </Text>
+              <Text fontSize="sm" color="whiteAlpha.500">
+                Just select image from your device
+              </Text>
+            </Box>
+            <Box fontSize="4xl" justifySelf="end">
               <MdCloudUpload />
-            </div>
-          </div>
-          <div className="main__card--white">
-            <div className="main__cardTitle">Free to watch</div>
-            <div className="main__cardText">Watch any meme you want</div>
-            <div className="main__cardIcon">
+            </Box>
+          </Box>
+
+          <Box
+            borderRadius="xl"
+            display="grid"
+            gridTemplateColumns="1fr 0fr"
+            p={7}
+            pt={6}
+            pb={6}
+            bg="white"
+            mt={5}
+            w="100%"
+            alignItems="center"
+            color="gray.900"
+            maxWidth="500px"
+          >
+            <Box>
+              <Text fontSize="xl" fontWeight="bold">
+                Free to watch
+              </Text>
+              <Text fontSize="sm" color="gray.500">
+                Watch any meme you want
+              </Text>
+            </Box>
+            <Box fontSize="4xl" justifySelf="end">
               <BsEmojiSunglassesFill />
-            </div>
-          </div>
-          <div className="main__card--m2">
-            <div className="main__cardTitle">Share with one click</div>
-            <div className="main__cardText">Share memes with your friends</div>
-            <div className="main__cardIcon">
+            </Box>
+          </Box>
+
+          <Box
+            borderRadius="xl"
+            display="grid"
+            gridTemplateColumns="1fr 0fr"
+            p={7}
+            pt={6}
+            pb={6}
+            bg="#7233FF"
+            mt={5}
+            w="100%"
+            alignItems="center"
+            maxWidth="500px"
+          >
+            <Box>
+              <Text fontSize="xl" fontWeight="bold">
+                Share with one click
+              </Text>
+              <Text fontSize="sm" color="whiteAlpha.500">
+                Share memes with your friends
+              </Text>
+            </Box>
+            <Box fontSize="4xl" justifySelf="end">
               <IoShareSocialSharp />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 };
