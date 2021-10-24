@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 // icons
-import { MdLibraryAdd, MdCloudUpload } from "react-icons/md";
+import { MdCloudUpload } from "react-icons/md";
 import { BsEmojiSunglassesFill } from "react-icons/bs";
 import { IoShareSocialSharp } from "react-icons/io5";
 import { Box, Text, Heading, Button } from "@chakra-ui/react";
+import { FaLongArrowAltRight } from "react-icons/fa";
+
+import "firebase/compat/firestore";
+import "firebase/compat/storage";
+import firebase from "../../firebase/clientApp";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+const firestore = firebase.firestore();
 
 export const MainPage: React.FC = () => {
+  const memesRef = firestore.collection("memes");
+  const [memeData] = useCollectionData(memesRef);
+  console.log(memeData);
+
   return (
     <Box
       bg="gray.900"
@@ -52,7 +63,7 @@ export const MainPage: React.FC = () => {
           <Text mt={12} display="flex" color="whiteAlpha.700">
             Uploaded memes:
             <Text fontWeight="bold" ml={2} color="white">
-              352
+              {memeData?.length}
             </Text>
           </Text>
 
@@ -62,7 +73,7 @@ export const MainPage: React.FC = () => {
             variant="outline"
             mt={5}
             p={5}
-            leftIcon={<MdLibraryAdd />}
+            rightIcon={<FaLongArrowAltRight display="flex" />}
             onClick={() =>
               window.scrollTo({
                 left: 0,
@@ -105,7 +116,7 @@ export const MainPage: React.FC = () => {
                 Just select image from your device
               </Text>
             </Box>
-            <Box fontSize={{base: "2xl", sm: "4xl"}} justifySelf="end">
+            <Box fontSize={{ base: "2xl", sm: "4xl" }} justifySelf="end">
               <MdCloudUpload />
             </Box>
           </Box>
@@ -133,7 +144,7 @@ export const MainPage: React.FC = () => {
                 Watch any meme you want
               </Text>
             </Box>
-            <Box fontSize={{base: "2xl", sm: "4xl"}} justifySelf="end">
+            <Box fontSize={{ base: "2xl", sm: "4xl" }} justifySelf="end">
               <BsEmojiSunglassesFill />
             </Box>
           </Box>
@@ -161,7 +172,7 @@ export const MainPage: React.FC = () => {
                 Share memes with your friends
               </Text>
             </Box>
-            <Box fontSize={{base: "2xl", sm: "4xl"}} justifySelf="end">
+            <Box fontSize={{ base: "2xl", sm: "4xl" }} justifySelf="end">
               <IoShareSocialSharp />
             </Box>
           </Box>

@@ -1,9 +1,10 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { Footer } from "./components/Footer";
 import { MainPage } from "./components/MainPage";
 import { Recent } from "./components/Recent";
 
-const Home: NextPage = () => {
+function Home() {
   return (
     <div>
       <Head>
@@ -15,9 +16,10 @@ const Home: NextPage = () => {
       <main className="index">
         <MainPage />
         <Recent />
+        <Footer />
       </main>
     </div>
   );
-};
+}
 
 export default Home;

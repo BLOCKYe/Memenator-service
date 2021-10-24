@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { Box, Image, Text, Icon, Badge } from "@chakra-ui/react";
 import { IoShareSocialSharp } from "react-icons/io5";
+
+import firebase from "../../firebase/clientApp";
+const firestore = firebase.firestore();
 
 interface Props {
   title: string;
   meme: string;
   likes: number;
+  id: string;
+  date: Date;
 }
 
 export const Meme: React.FC<Props> = (props) => {
+  const [like, setLike] = useState(1);
+
+  const giveLike = async () => {
+    await firestore
+      .collection("memes")
+      .doc(props.id)
+      .update({ likes: props.likes + like });
+    setLike(0);
+  };
+
   return (
     <Box
       mt={12}
@@ -45,27 +60,29 @@ export const Meme: React.FC<Props> = (props) => {
           {props.title}
         </Text>
 
-        <Badge fontSize="0.7rem" colorScheme="purple">
-          New
-        </Badge>
-
         <Icon
-          _hover={{ color: "#7233FF", cursor: "pointer" }}
+          _hover={{ cursor: "pointer" }}
           color="whiteAlpha.700"
           ml={3}
           as={IoShareSocialSharp}
         />
         <Text ml={1} justifySelf="end">
-          {props.likes}
+          0
         </Text>
 
         <Icon
-          color="whiteAlpha.700"
+          color={like !== 0 ? "whiteAlpha.700" : "purple.400"}
           ml={3}
           as={AiFillHeart}
-          _hover={{ color: "#7233FF", cursor: "pointer" }}
+          _hover={{ color: "purple.400", cursor: "pointer" }}
+          onClick={giveLike}
         />
-        <Text ml={1} justifySelf="end">
+        <Text
+          _hover={{ cursor: "pointer" }}
+          onClick={giveLike}
+          ml={1}
+          justifySelf="end"
+        >
           {props.likes}
         </Text>
       </Box>

@@ -23,6 +23,8 @@ import "firebase/compat/firestore";
 import "firebase/compat/storage";
 import firebase from "../../firebase/clientApp";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { v4 } from "uuid";
+
 const firestore = firebase.firestore();
 
 export const Recent: React.FC = () => {
@@ -57,7 +59,10 @@ export const Recent: React.FC = () => {
       await fileRef.put(file);
       const image = await fileRef.getDownloadURL();
 
-      await memesRef.add({
+      const test = v4();
+
+      await memesRef.doc(test).set({
+        id: test,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         meme: image,
         title: inputTitle,
@@ -90,7 +95,7 @@ export const Recent: React.FC = () => {
       flexDirection="column"
       alignItems="center"
       borderTop={{ lg: "1px" }}
-      borderColor={{lg: "gray.700"}}
+      borderColor={{ lg: "gray.700" }}
     >
       <Box
         flexDirection={{ base: "column", lg: "row" }}
@@ -121,7 +126,7 @@ export const Recent: React.FC = () => {
           >
             Nam eleifend magna purus, vel tempor dolor dignissim id. Nullam
             volutpat ipsum feugiat luctus sodales. Vestibulum neque tellus,
-            commodo et nisl sed, efficitur finibus ex.
+            commodo et nisl sed, efficitur finibus.
           </Text>
         </Box>
 
@@ -206,10 +211,12 @@ export const Recent: React.FC = () => {
         <Box>
           {memeData?.slice(0, memeData.length / 3).map((meme: any) => (
             <Meme
+              date={meme.createdAt}
               key={meme.meme}
               title={meme.title}
               meme={meme.meme}
               likes={meme.likes}
+              id={meme.id}
             />
           ))}
         </Box>
@@ -218,10 +225,12 @@ export const Recent: React.FC = () => {
             ?.slice(memeData.length / 3, (memeData.length / 3) * 2)
             .map((meme: any) => (
               <Meme
+                date={meme.createdAt}
                 key={meme.meme}
                 title={meme.title}
                 meme={meme.meme}
                 likes={meme.likes}
+                id={meme.id}
               />
             ))}
         </Box>
@@ -230,10 +239,12 @@ export const Recent: React.FC = () => {
             ?.slice((memeData.length / 3) * 2, memeData.length)
             .map((meme: any) => (
               <Meme
+                date={meme.createdAt}
                 key={meme.meme}
                 title={meme.title}
                 meme={meme.meme}
                 likes={meme.likes}
+                id={meme.id}
               />
             ))}
         </Box>
