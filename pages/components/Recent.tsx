@@ -97,23 +97,9 @@ export const Recent: React.FC = () => {
       borderTop={{ lg: "1px" }}
       borderColor={{ lg: "gray.700" }}
     >
-      <Box
-        flexDirection={{ base: "column", lg: "row" }}
-        display="flex"
-        justifySelf="center"
-        alignItems="center"
-      >
-        <Box
-          alignItems={{ base: "center", lg: "start" }}
-          display="flex"
-          flexDirection="column"
-          width="100%"
-        >
-          <Heading
-            fontSize={{ base: "4xl", xl: "5xl" }}
-            mt={{ base: 12, lg: 0 }}
-            color="white"
-          >
+      <Box flexDirection={{ base: "column", lg: "row" }} display="flex" justifySelf="center" alignItems="center">
+        <Box alignItems={{ base: "center", lg: "start" }} display="flex" flexDirection="column" width="100%">
+          <Heading fontSize={{ base: "4xl", xl: "5xl" }} mt={{ base: 12, lg: 0 }} color="white">
             Recent memes
           </Heading>
 
@@ -124,9 +110,8 @@ export const Recent: React.FC = () => {
             width={{ base: "95%", xl: "60%" }}
             fontSize="l"
           >
-            Nam eleifend magna purus, vel tempor dolor dignissim id. Nullam
-            volutpat ipsum feugiat luctus sodales. Vestibulum neque tellus,
-            commodo et nisl sed, efficitur finibus.
+            Nam eleifend magna purus, vel tempor dolor dignissim id. Nullam volutpat ipsum feugiat luctus sodales. Vestibulum
+            neque tellus, commodo et nisl sed, efficitur finibus.
           </Text>
         </Box>
 
@@ -148,19 +133,8 @@ export const Recent: React.FC = () => {
             <PopoverContent p={3}>
               <PopoverArrow />
               <PopoverCloseButton />
-              <PopoverHeader
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                fontWeight="bold"
-                p={3}
-                textAlign="center"
-              >
-                {inputImage === "" ? (
-                  <Box>Select file</Box>
-                ) : (
-                  <Image borderRadius="xl" src={inputImage} alt="preview" />
-                )}
+              <PopoverHeader display="flex" flexDirection="column" alignItems="center" fontWeight="bold" p={3} textAlign="center">
+                {inputImage === "" ? <Box>Select file</Box> : <Image borderRadius="xl" src={inputImage} alt="preview" />}
               </PopoverHeader>
               <PopoverBody
                 display="flex"
@@ -168,12 +142,7 @@ export const Recent: React.FC = () => {
                 alignItems="center"
                 boxShadow="rgba(114, 51, 255, 0.15) 0px 28px 50px 0px"
               >
-                <input
-                  onChange={handleInputImage}
-                  className="inputFile"
-                  type="file"
-                  accept="image/png, image/jpeg"
-                ></input>
+                <input onChange={handleInputImage} className="inputFile" type="file" accept="image/png, image/jpeg"></input>
                 <Input
                   onChange={handleInputTitle}
                   value={inputTitle}
@@ -186,12 +155,7 @@ export const Recent: React.FC = () => {
                   variant="flushed"
                   placeholder="Set title"
                 />
-                <Button
-                  onClick={submitUpload}
-                  mt={5}
-                  bg="#fbfbff"
-                  variant="solid"
-                >
+                <Button onClick={submitUpload} mt={5} bg="#fbfbff" variant="solid">
                   Upload meme
                 </Button>
               </PopoverBody>
@@ -210,43 +174,18 @@ export const Recent: React.FC = () => {
       >
         <Box>
           {memeData?.slice(0, memeData.length / 3).map((meme: any) => (
-            <Meme
-              date={meme.createdAt}
-              key={meme.meme}
-              title={meme.title}
-              meme={meme.meme}
-              likes={meme.likes}
-              id={meme.id}
-            />
+            <Meme date={meme.createdAt} key={meme.meme} title={meme.title} meme={meme.meme} likes={meme.likes} id={meme.id} />
           ))}
         </Box>
         <Box>
-          {memeData
-            ?.slice(memeData.length / 3, (memeData.length / 3) * 2)
-            .map((meme: any) => (
-              <Meme
-                date={meme.createdAt}
-                key={meme.meme}
-                title={meme.title}
-                meme={meme.meme}
-                likes={meme.likes}
-                id={meme.id}
-              />
-            ))}
+          {memeData?.slice(memeData.length / 3, (memeData.length / 3) * 2).map((meme: any) => (
+            <Meme date={meme.createdAt} key={meme.meme} title={meme.title} meme={meme.meme} likes={meme.likes} id={meme.id} />
+          ))}
         </Box>
         <Box>
-          {memeData
-            ?.slice((memeData.length / 3) * 2, memeData.length)
-            .map((meme: any) => (
-              <Meme
-                date={meme.createdAt}
-                key={meme.meme}
-                title={meme.title}
-                meme={meme.meme}
-                likes={meme.likes}
-                id={meme.id}
-              />
-            ))}
+          {memeData?.slice((memeData.length / 3) * 2, memeData.length).map((meme: any) => (
+            <Meme date={meme.createdAt} key={meme.meme} title={meme.title} meme={meme.meme} likes={meme.likes} id={meme.id} />
+          ))}
         </Box>
       </Box>
     </Box>

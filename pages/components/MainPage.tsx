@@ -15,7 +15,6 @@ const firestore = firebase.firestore();
 export const MainPage: React.FC = () => {
   const memesRef = firestore.collection("memes");
   const [memeData] = useCollectionData(memesRef);
-  console.log(memeData);
 
   return (
     <Box
@@ -28,11 +27,7 @@ export const MainPage: React.FC = () => {
       display="flex"
       alignItems="center"
     >
-      <Box
-        display={{ lg: "grid" }}
-        gridTemplateColumns="1fr 1fr"
-        alignItems="center"
-      >
+      <Box display={{ lg: "grid" }} gridTemplateColumns="1fr 1fr" alignItems="center">
         <Box
           alignItems={{ base: "center", lg: "start" }}
           display="flex"
@@ -40,11 +35,7 @@ export const MainPage: React.FC = () => {
           justifySelf="end"
           width={{ xl: "100%" }}
         >
-          <Heading
-            fontSize={{ base: "4xl", xl: "5xl" }}
-            mt={{ base: 24, lg: 0 }}
-            color="white"
-          >
+          <Heading fontSize={{ base: "4xl", xl: "5xl" }} mt={{ base: 24, lg: 0 }} color="white">
             Memenator
           </Heading>
 
@@ -55,9 +46,8 @@ export const MainPage: React.FC = () => {
             width={{ base: "95%", xl: "90%" }}
             fontSize="l"
           >
-            Nam eleifend magna purus, vel tempor dolor dignissim id. Nullam
-            volutpat ipsum feugiat luctus sodales. Vestibulum neque tellus,
-            commodo et nisl sed, efficitur finibus ex.
+            Nam eleifend magna purus, vel tempor dolor dignissim id. Nullam volutpat ipsum feugiat luctus sodales. Vestibulum
+            neque tellus, commodo et nisl sed, efficitur finibus ex.
           </Text>
 
           <Text mt={12} display="flex" color="whiteAlpha.700">
@@ -86,13 +76,7 @@ export const MainPage: React.FC = () => {
           </Button>
         </Box>
 
-        <Box
-          alignItems="center"
-          display="flex"
-          flexDirection="column"
-          justifySelf="start"
-          width={{ base: "100%", xl: "100%" }}
-        >
+        <Box alignItems="center" display="flex" flexDirection="column" justifySelf="start" width={{ base: "100%", xl: "100%" }}>
           <Box
             borderRadius="xl"
             display="grid"

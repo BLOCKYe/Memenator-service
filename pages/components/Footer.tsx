@@ -2,6 +2,7 @@ import { Button, ButtonGroup } from "@chakra-ui/button";
 import { Box, Heading, Text } from "@chakra-ui/layout";
 import React from "react";
 import { RiFacebookFill, RiTwitterFill } from "react-icons/ri";
+import { Link } from "@chakra-ui/react";
 
 export const Footer: React.FC = () => {
   return (
@@ -18,13 +19,13 @@ export const Footer: React.FC = () => {
       borderTop={{ lg: "1px" }}
       borderColor={{ lg: "gray.700" }}
     >
-      <Heading>Memenator</Heading>
+      <Link href="/">
+        <Heading>Memenator</Heading>
+      </Link>
       <Text mt={3} textAlign="center" maxW="3xl" color="whiteAlpha.500">
-        Etiam nibh dui, euismod nec nulla quis, ultricies tempor est. Curabitur
-        in dolor pretium, pellentesque leo non, faucibus magna. Pellentesque
-        dignissim dignissim nibh, in interdum neque cursus fermentum. Nunc
-        efficitur mollis finibus. Phasellus ullamcorper libero sed blandit
-        faucibus.
+        Etiam nibh dui, euismod nec nulla quis, ultricies tempor est. Curabitur in dolor pretium, pellentesque leo non, faucibus
+        magna. Pellentesque dignissim dignissim nibh, in interdum neque cursus fermentum. Nunc efficitur mollis finibus. Phasellus
+        ullamcorper libero sed blandit faucibus.
       </Text>
 
       <ButtonGroup mt={5} spacing="6">

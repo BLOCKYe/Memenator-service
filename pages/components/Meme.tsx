@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
-import { Box, Image, Text, Icon, Badge } from "@chakra-ui/react";
+import { Box, Image, Text, Icon } from "@chakra-ui/react";
 import { IoShareSocialSharp } from "react-icons/io5";
+import { Link } from "@chakra-ui/react";
 
 import firebase from "../../firebase/clientApp";
 const firestore = firebase.firestore();
@@ -39,33 +40,15 @@ export const Meme: React.FC<Props> = (props) => {
       maxW="sm"
       bg="gray.800"
     >
-      <Image maxH="m" w="100%" src={props.meme} alt={props.title}></Image>
-      <Box
-        p={6}
-        pl={5}
-        pr={5}
-        alignItems="center"
-        w="100%"
-        display="grid"
-        gridTemplateColumns="1fr 0fr 0fr 0fr 0fr 0fr"
-      >
-        <Text
-          color="whiteAlpha.900"
-          lineHeight="tight"
-          isTruncated
-          fontWeight="bold"
-          fontSize="sm"
-          ml={3}
-        >
+      <Link maxH="m" w="100%" href={`/memes/${props.id}`}>
+        <Image maxH="m" w="100%" src={props.meme} alt={props.title}></Image>{" "}
+      </Link>
+      <Box p={6} pl={5} pr={5} alignItems="center" w="100%" display="grid" gridTemplateColumns="1fr 0fr 0fr 0fr 0fr 0fr">
+        <Text color="whiteAlpha.900" lineHeight="tight" isTruncated fontWeight="bold" fontSize="sm" ml={3}>
           {props.title}
         </Text>
 
-        <Icon
-          _hover={{ cursor: "pointer" }}
-          color="whiteAlpha.700"
-          ml={3}
-          as={IoShareSocialSharp}
-        />
+        <Icon _hover={{ cursor: "pointer" }} color="whiteAlpha.700" ml={3} as={IoShareSocialSharp} />
         <Text ml={1} justifySelf="end">
           0
         </Text>
@@ -77,12 +60,7 @@ export const Meme: React.FC<Props> = (props) => {
           _hover={{ color: "purple.400", cursor: "pointer" }}
           onClick={giveLike}
         />
-        <Text
-          _hover={{ cursor: "pointer" }}
-          onClick={giveLike}
-          ml={1}
-          justifySelf="end"
-        >
+        <Text _hover={{ cursor: "pointer" }} onClick={giveLike} ml={1} justifySelf="end">
           {props.likes}
         </Text>
       </Box>
