@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
-import { Box, Image, Text, Icon } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import { IoShareSocialSharp } from "react-icons/io5";
 import { Link } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/button";
 import { useToast } from "@chakra-ui/toast";
 
 import firebase from "../../firebase/clientApp";
+import "firebase/compat/firestore";
+import "firebase/compat/storage";
 const firestore = firebase.firestore();
 
 interface Props {
@@ -97,3 +99,5 @@ export const Meme: React.FC<Props> = (props) => {
     </Box>
   );
 };
+
+export default Meme;

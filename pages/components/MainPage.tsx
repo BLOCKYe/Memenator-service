@@ -165,3 +165,5 @@ export const MainPage: React.FC = () => {
     </Box>
   );
 };
+
+export default MainPage

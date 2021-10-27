@@ -130,13 +130,13 @@ export const Recent: React.FC = () => {
             </Button>
           </PopoverTrigger>
           <Portal>
-            <PopoverContent w={{base: "280px", sm: "350px"}} p={3}>
+            <PopoverContent w={{ base: "280px", sm: "350px" }} p={3}>
               <PopoverArrow />
               <PopoverCloseButton />
               <PopoverHeader display="flex" flexDirection="column" alignItems="center" fontWeight="bold" p={3} textAlign="center">
                 {inputImage === "" ? <Box>Select file</Box> : <Image borderRadius="xl" src={inputImage} alt="preview" />}
               </PopoverHeader>
-              <PopoverBody 
+              <PopoverBody
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
@@ -191,3 +191,5 @@ export const Recent: React.FC = () => {
     </Box>
   );
 };
+
+export default Recent;

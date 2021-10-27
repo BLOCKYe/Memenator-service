@@ -40,3 +40,5 @@ export const Footer: React.FC = () => {
     </Box>
   );
 };
+
+export default Footer
