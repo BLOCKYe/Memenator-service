@@ -19,9 +19,7 @@ export const Footer: React.FC = () => {
       borderTop={{ lg: "1px" }}
       borderColor={{ lg: "gray.700" }}
     >
-      <Link href="/">
-        <Heading>Memenator</Heading>
-      </Link>
+      <Heading>Memenator</Heading>
       <Text mt={3} textAlign="center" maxW="3xl" color="whiteAlpha.500">
         Etiam nibh dui, euismod nec nulla quis, ultricies tempor est. Curabitur in dolor pretium, pellentesque leo non, faucibus
         magna. Pellentesque dignissim dignissim nibh, in interdum neque cursus fermentum. Nunc efficitur mollis finibus. Phasellus

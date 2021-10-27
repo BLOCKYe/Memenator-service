@@ -99,7 +99,7 @@ export const Recent: React.FC = () => {
     >
       <Box flexDirection={{ base: "column", lg: "row" }} display="flex" justifySelf="center" alignItems="center">
         <Box alignItems={{ base: "center", lg: "start" }} display="flex" flexDirection="column" width="100%">
-          <Heading fontSize={{ base: "4xl", xl: "5xl" }} mt={{ base: 12, lg: 0 }} color="white">
+          <Heading textAlign="center" fontSize={{ base: "4xl", xl: "5xl" }} mt={{ base: 12, lg: 0 }} color="white">
             Recent memes
           </Heading>
 
@@ -130,13 +130,13 @@ export const Recent: React.FC = () => {
             </Button>
           </PopoverTrigger>
           <Portal>
-            <PopoverContent p={3}>
+            <PopoverContent w={{base: "280px", sm: "350px"}} p={3}>
               <PopoverArrow />
               <PopoverCloseButton />
               <PopoverHeader display="flex" flexDirection="column" alignItems="center" fontWeight="bold" p={3} textAlign="center">
                 {inputImage === "" ? <Box>Select file</Box> : <Image borderRadius="xl" src={inputImage} alt="preview" />}
               </PopoverHeader>
-              <PopoverBody
+              <PopoverBody 
                 display="flex"
                 flexDirection="column"
                 alignItems="center"

@@ -3,6 +3,8 @@ import { AiFillHeart } from "react-icons/ai";
 import { Box, Image, Text, Icon } from "@chakra-ui/react";
 import { IoShareSocialSharp } from "react-icons/io5";
 import { Link } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/button";
+import { useToast } from "@chakra-ui/toast";
 
 import firebase from "../../firebase/clientApp";
 const firestore = firebase.firestore();
@@ -17,6 +19,7 @@ interface Props {
 
 export const Meme: React.FC<Props> = (props) => {
   const [like, setLike] = useState(1);
+  const toast = useToast();
 
   const giveLike = async () => {
     await firestore
@@ -24,6 +27,18 @@ export const Meme: React.FC<Props> = (props) => {
       .doc(props.id)
       .update({ likes: props.likes + like });
     setLike(0);
+  };
+
+  const shareLink = () => {
+    navigator.clipboard.writeText(`${window.location.href}memes/${props.id}`);
+
+    toast({
+      title: "Link copied to clipboard!",
+      description: "You can share meme!",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
   };
 
   return (
@@ -43,26 +58,41 @@ export const Meme: React.FC<Props> = (props) => {
       <Link maxH="m" w="100%" href={`/memes/${props.id}`}>
         <Image maxH="m" w="100%" src={props.meme} alt={props.title}></Image>{" "}
       </Link>
-      <Box p={6} pl={5} pr={5} alignItems="center" w="100%" display="grid" gridTemplateColumns="1fr 0fr 0fr 0fr 0fr 0fr">
-        <Text color="whiteAlpha.900" lineHeight="tight" isTruncated fontWeight="bold" fontSize="sm" ml={3}>
-          {props.title}
-        </Text>
+      <Text color="whiteAlpha.900" fontWeight="bold" fontSize="sm" pt={5} pb={5}>
+        {props.title}
+      </Text>
+      <Box
+        borderTop="1px" 
+        borderColor="gray.700" 
+        w="100%"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        pt={5}
+        mb={5}
+      >
+        <Button
+          colorScheme="whiteAlpha"
+          _focus={{ outline: "none" }}
+          variant="outline"
+          leftIcon={<IoShareSocialSharp display="flex" />}
+          mr={3}
+          onClick={shareLink}
+        >
+          <Text fontSize=".7rem">Share</Text>
+        </Button>
 
-        <Icon _hover={{ cursor: "pointer" }} color="whiteAlpha.700" ml={3} as={IoShareSocialSharp} />
-        <Text ml={1} justifySelf="end">
-          0
-        </Text>
-
-        <Icon
-          color={like !== 0 ? "whiteAlpha.700" : "purple.400"}
-          ml={3}
-          as={AiFillHeart}
-          _hover={{ color: "purple.400", cursor: "pointer" }}
+        <Button
+          colorScheme={like !== 0 ? "whiteAlpha" : "purple"}
+          _hover={{ bg: `${like !== 0 ? "whiteAlpha.100" : "purple.900"}` }}
+          _focus={{ outline: "none" }}
+          variant="outline"
+          leftIcon={<AiFillHeart display="flex" />}
           onClick={giveLike}
-        />
-        <Text _hover={{ cursor: "pointer" }} onClick={giveLike} ml={1} justifySelf="end">
+          ml={3}
+        >
           {props.likes}
-        </Text>
+        </Button>
       </Box>
     </Box>
   );
